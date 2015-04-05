@@ -76,7 +76,7 @@ public class Search extends HttpServlet {
     		return;
     	}
     	String yyyy = yyyymm.substring(0, 4);
-    	String mm = yyyymm.substring(2);
+    	String mm = yyyymm.substring(4);
     	int y, m;
     	try {
     		y = Integer.parseInt(yyyy);
@@ -101,7 +101,7 @@ public class Search extends HttpServlet {
 		}
     	PreparedStatement pst;
     	try {
-			pst = con.prepareStatement("SELECT CORD, NENGETSU, NISSU FROM SAMPLE WHERE CODE = ? AND NENGETSU = ?");
+			pst = con.prepareStatement("SELECT CODE, NENGETSU, NISSU FROM SAMPLE WHERE CODE = ? AND NENGETSU = ?");
 		} catch (SQLException e) {
 			throw new IOException("wrong prepareStatement", e);
 		}
