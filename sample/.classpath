@@ -27,6 +27,5 @@
 	<classpathentry kind="lib" path="/home/mitsutoshi/lib/apache-tomcat-6.0.43/lib/tomcat-i18n-es.jar"/>
 	<classpathentry kind="lib" path="/home/mitsutoshi/lib/apache-tomcat-6.0.43/lib/tomcat-i18n-fr.jar"/>
 	<classpathentry kind="lib" path="/home/mitsutoshi/lib/apache-tomcat-6.0.43/lib/tomcat-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="/usr/share/java/postgresql-jdbc.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
