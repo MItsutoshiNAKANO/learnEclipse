@@ -117,6 +117,7 @@ public class Search extends HttpServlet {
 		} catch (SQLException e) {
 			throw new IOException("wrong executeQuery", e);
 		}
+    	
     	//TODO
     	
     	

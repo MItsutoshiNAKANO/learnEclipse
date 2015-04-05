@@ -10,6 +10,7 @@
 <body>
 <h1>詳細</h1>
 <from method="post" action="Search">
+
 <input type="submit"/>
 </from>
 
