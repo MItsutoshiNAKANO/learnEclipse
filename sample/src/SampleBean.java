@@ -12,6 +12,7 @@ public class SampleBean {
 	private int code;
 	private Date ymd;
 	private int days;
+	
 	/**
 	 * @return the code
 	 */
@@ -47,6 +48,14 @@ public class SampleBean {
 	 */
 	public void setDays(int days) {
 		this.days = days;
+	}
+	
+	/**
+	 * @see Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return code + " " + ymd + " " + days;
 	}
 
 }
