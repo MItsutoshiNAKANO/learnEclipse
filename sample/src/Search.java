@@ -58,6 +58,15 @@ public class Search extends HttpServlet {
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
+    	
+    	int codenum;
+    	try {
+    		codenum = Integer.parseInt(code);
+    	} catch (NumberFormatException e) {
+    		request.getRequestDispatcher("/index.jsp").forward(request, response);
+    		return;
+    	}
+    	
     	Connection con;
     	try {
 			con = ds.getConnection();
@@ -66,9 +75,14 @@ public class Search extends HttpServlet {
 		}
     	PreparedStatement pst;
     	try {
-			pst = con.prepareStatement("SELECT CORD, NENGETSU, NISSU FROM SAMPLE WHERE CODE= ? AND NENGETSU= ?");
+			pst = con.prepareStatement("SELECT CORD, NENGETSU, NISSU FROM SAMPLE WHERE CODE = ? AND NENGETSU = ?");
 		} catch (SQLException e) {
 			throw new IOException("wrong prepareStatement", e);
+		}
+    	try {
+			pst.setInt(1, codenum);
+		} catch (SQLException e) {
+			throw new IOException("wrong number", e);
 		}
     	//TODO
     	
