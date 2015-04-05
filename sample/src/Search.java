@@ -2,6 +2,7 @@
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -63,6 +64,14 @@ public class Search extends HttpServlet {
 		} catch (SQLException e) {
 			throw new IOException("could not connect DB", e);
 		}
+    	PreparedStatement pst;
+    	try {
+			pst = con.prepareStatement("SELECT CORD, NENGETSU, NISSU FROM SAMPLE WHERE CODE= ? AND NENGETSU= ?");
+		} catch (SQLException e) {
+			throw new IOException("wrong prepareStatement", e);
+		}
+    	//TODO
+    	
     	
     	request.getRequestDispatcher("/detail.jsp").forward(request, response);
     	return;
