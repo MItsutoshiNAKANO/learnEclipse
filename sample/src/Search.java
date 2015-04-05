@@ -2,7 +2,9 @@
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -66,7 +68,31 @@ public class Search extends HttpServlet {
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
+
+    	// parse nengetu
+    	String yyyymm = request.getParameter("nengetu");
+    	if (yyyymm.length() != 6) {
+    		request.getRequestDispatcher("/index.jsp").forward(request, response);
+    		return;
+    	}
+    	String yyyy = yyyymm.substring(0, 4);
+    	String mm = yyyymm.substring(2);
+    	int y, m;
+    	try {
+    		y = Integer.parseInt(yyyy);
+    		m = Integer.parseInt(mm);
+    	} catch (NumberFormatException e) {
+    		request.getRequestDispatcher("/index.jsp").forward(request, response);
+    		return;
+    	}
+    	if (m < 1 || m > 12) {
+    		request.getRequestDispatcher("/index.jsp").forward(request, response);
+    		return;
+    	}
     	
+    	@SuppressWarnings("deprecation")
+		Date ym = new Date(y - 1900, m - 1, 1);
+ 
     	Connection con;
     	try {
 			con = ds.getConnection();
@@ -81,8 +107,15 @@ public class Search extends HttpServlet {
 		}
     	try {
 			pst.setInt(1, codenum);
+			pst.setDate(2, ym);
 		} catch (SQLException e) {
 			throw new IOException("wrong number", e);
+		}
+    	ResultSet rst;
+    	try {
+			rst = pst.executeQuery();
+		} catch (SQLException e) {
+			throw new IOException("wrong executeQuery", e);
 		}
     	//TODO
     	

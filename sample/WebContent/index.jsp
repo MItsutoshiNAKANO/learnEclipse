@@ -11,7 +11,7 @@
 <h1>テスト</h1>
 <form method="post" action="Search">
 <label>コード<input type="text" name="code"/></label>
-<label>年月<input type="text" name="nengetu"/></label>
+<label>年月(YYYYMM)<input type="text" name="nengetu"/></label>
 <input type="submit"/>
 </form>
 
