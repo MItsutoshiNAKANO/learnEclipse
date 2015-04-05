@@ -1,6 +1,8 @@
 
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -55,6 +57,13 @@ public class Search extends HttpServlet {
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
+    	Connection con;
+    	try {
+			con = ds.getConnection();
+		} catch (SQLException e) {
+			throw new IOException("could not connect DB", e);
+		}
+    	
     	request.getRequestDispatcher("/detail.jsp").forward(request, response);
     	return;
     }
