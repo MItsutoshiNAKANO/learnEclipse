@@ -31,6 +31,14 @@
     -->
 
 	<!-- add 2015-04-05 for PostgreSQL -->
+	<Resource name="jdbc/postgres"  auth="container"
+            type="javax.sql.DataSource" debug="1"
+            validationQuery="select version();"
+            url="jdbc:postgresql://localhost/mitsutoshi"
+			  driverClassName="org.postgresql.Driver"
+			  username="mitsutoshi"
+			  maxIdle="2" />
+<!--
 	<ResourceParams name="jdbc/postgres">
 	    <parameter>
 	        <name>validationQuery</name>
@@ -38,7 +46,7 @@
 	    </parameter>
 	    <parameter>
 	        <name>url</name>
-	        <value>jdbc:postgresql://localhost/mitsutoshi</value>
+	        <value>jdbc:postgresql:mitsutoshi</value>
 	    </parameter>
 	    <parameter>
 	        <name>password</name>
@@ -65,5 +73,5 @@
 	        <value>2</value>
 	    </parameter>
 	</ResourceParams> 
-
+-->
 </Context>
