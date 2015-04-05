@@ -13,9 +13,9 @@ import java.util.Date;
 public class SampleBean {
 	private int code;
 	private Calendar ymd;
-	private int days;
 	private String YYYYMM;
-		
+	private int days;
+	
 	/**
 	 * @return the code
 	 */
@@ -39,30 +39,17 @@ public class SampleBean {
 	 */
 	public void setYmd(Calendar ymd) {
 		this.ymd = ymd;
-	}
-	/**
-	 * @return the days
-	 */
-	public int getDays() {
-		return days;
-	}
-	/**
-	 * @param days the days to set
-	 */
-	public void setDays(int days) throws NumberFormatException {
-		if (days < -1 || days > 31) {
-			throw new NumberFormatException(days + " is wrong days");
-		}
-		this.days = days;
+		
+		int y =  ymd.get(Calendar.YEAR);
+		int m =  ymd.get(Calendar.MONTH) + 1;
+		YYYYMM = y + "" + ((m > 9) ? (m) : ("0" + m));
 	}
 
 	/**
 	 * @return the YYYYMM
 	 */
 	public String getYYYYMM() {
-		int y =  ymd.get(Calendar.YEAR);
-		int m =  ymd.get(Calendar.MONTH) + 1;
-		return y + "" + m;
+		return YYYYMM;
 	}
 
 	public void setYYYYMM(String yyyymm) throws NumberFormatException  {
@@ -78,24 +65,31 @@ public class SampleBean {
     		throw new NumberFormatException(mm + " is invalid month");
     	}
     	ymd = new GregorianCalendar(y, m - 1, 1);
+    	this.YYYYMM = yyyymm;
 	}
 
 	public Date getDate() {
 		return ymd.getTime();
 	}
 
-	public void setDate(Date d) {
-		ymd = new GregorianCalendar();
-		ymd.setTime(d);
-	}
-
 	public java.sql.Date getSqlDate() {
 		return null; // TODO
 	}
-	
-	public void setSqlDate(java.sql.Date d) {
-		ymd = new GregorianCalendar();
-		ymd.setTime(d);
+
+	/**
+	 * @return the days
+	 */
+	public int getDays() {
+		return days;
+	}
+	/**
+	 * @param days the days to set
+	 */
+	public void setDays(int days) throws NumberFormatException {
+		if (days < -1 || days > 31) {
+			throw new NumberFormatException(days + " is wrong days");
+		}
+		this.days = days;
 	}
 	
 	/**
