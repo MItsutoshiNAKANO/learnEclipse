@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
-<xjsp:useBean id="Bean" scope="request" class="SampleBean" type="SampleBean"/>
+<jsp:useBean id="Bean" scope="request" class="jp.ne.zaq.rinku.bkbin005.SampleBean" type="jp.ne.zaq.rinku.bkbin005.SampleBean"/>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,8 +11,8 @@
 <body>
 <h1>詳細</h1>
 
-番号 <xjsp:getProperty name="Bean" property="code" />
-年月 <xjsp:getProperty name="Bean" property="YYYYMM" />
+番号 <jsp:getProperty name="Bean" property="code" />
+年月 <jsp:getProperty name="Bean" property="YYYYMM" />
 
 <form method="post" action="Search">
 

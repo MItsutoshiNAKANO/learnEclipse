@@ -1,6 +1,7 @@
 /**
  * 
  */
+package jp.ne.zaq.rinku.bkbin005;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -13,6 +14,7 @@ public class SampleBean {
 	private int code;
 	private Calendar ymd;
 	private int days;
+	private String YYYYMM;
 		
 	/**
 	 * @return the code
