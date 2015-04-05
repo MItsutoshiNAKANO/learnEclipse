@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
+<xjsp:useBean id="Bean" class="SampleBean"/>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -9,10 +10,14 @@
 </head>
 <body>
 <h1>詳細</h1>
-<from method="post" action="Search">
+
+番号 <xjsp:getProperty name="Bean" property="code" />
+年月 <xjsp:getProperty name="Bean" property="YYYYMM" />
+
+<form method="post" action="Search">
 
 <input type="submit"/>
-</from>
+</form>
 
 </body>
 </html>

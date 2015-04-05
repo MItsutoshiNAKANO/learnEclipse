@@ -1,4 +1,6 @@
-
+/**
+ * 
+ */
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -69,30 +71,15 @@ public class Search extends HttpServlet {
     		return;
     	}
 
-    	// parse nengetu
     	String yyyymm = request.getParameter("nengetu");
-    	if (yyyymm.length() != 6) {
-    		request.getRequestDispatcher("/index.jsp").forward(request, response);
-    		return;
-    	}
-    	String yyyy = yyyymm.substring(0, 4);
-    	String mm = yyyymm.substring(4);
-    	int y, m;
+    	SampleBean b = new SampleBean();
     	try {
-    		y = Integer.parseInt(yyyy);
-    		m = Integer.parseInt(mm);
+    		b.setYYYYMM(yyyymm);
     	} catch (NumberFormatException e) {
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
-    	if (m < 1 || m > 12) {
-    		request.getRequestDispatcher("/index.jsp").forward(request, response);
-    		return;
-    	}
-    	
-    	@SuppressWarnings("deprecation")
-		Date ym = new Date(y - 1900, m - 1, 1);
- 
+
     	Connection con;
     	try {
 			con = ds.getConnection();
@@ -107,7 +94,7 @@ public class Search extends HttpServlet {
 		}
     	try {
 			pst.setInt(1, codenum);
-			pst.setDate(2, ym);
+			pst.setDate(2, b.getSqlDate());
 		} catch (SQLException e) {
 			throw new IOException("wrong number", e);
 		}
@@ -117,10 +104,19 @@ public class Search extends HttpServlet {
 		} catch (SQLException e) {
 			throw new IOException("wrong executeQuery", e);
 		}
-    	
-    	//TODO
-    	
-    	
+		int days;
+    	try {
+			if (rst.next()) {
+				days = rst.getInt("DAYS");
+			} else {
+				days = -1;
+			}
+		} catch (SQLException e) {
+			throw new IOException("DB was wrong", e);
+		}
+    	b.setCode(codenum);
+    	b.setDays(days);
+    	request.setAttribute("Bean", b);
     	request.getRequestDispatcher("/detail.jsp").forward(request, response);
     	return;
     }
