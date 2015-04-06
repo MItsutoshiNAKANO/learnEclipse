@@ -9,15 +9,19 @@
 <title>詳細</title>
 </head>
 <body>
+<header>
 <h1>詳細</h1>
+番号 <jsp:getProperty name="Bean" property="code"/>
+年月 <jsp:getProperty name="Bean" property="YYYYMM"/>
+</header>
 
-番号 <jsp:getProperty name="Bean" property="code" />
-年月 <jsp:getProperty name="Bean" property="YYYYMM" />
-
-<form method="post" action="Search">
-
+<form method="post" action="${Bean.state}">
+<input type="hidden" name="code" value="${Bean.code}"/>
+<input type="hidden" name="nengetu" value="${Bean.YYYYMM}"/>
+<label id="days">日数<input type="number" min="0" max="31" name="days" value="{$Bean.days}"/></label>
 <input type="submit"/>
 </form>
+<a href="index.jsp">戻る</a>
 
 </body>
 </html>

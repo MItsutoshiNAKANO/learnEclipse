@@ -19,6 +19,30 @@
     <servlet-name>Search</servlet-name>
     <url-pattern>/Search</url-pattern>
   </servlet-mapping>
+ 
+  <servlet>
+    <description></description>
+    <display-name>Update</display-name>
+    <servlet-name>Update</servlet-name>
+    <servlet-class>Update</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Update</servlet-name>
+    <url-pattern>/UPDATE</url-pattern>
+  </servlet-mapping>
+ 
+  <servlet>
+    <description></description>
+    <display-name>Insert</display-name>
+    <servlet-name>Insert</servlet-name>
+    <servlet-class>Insert</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Insert</servlet-name>
+    <url-pattern>/INSERT</url-pattern>
+  </servlet-mapping>
+ 
+ 
   <resource-ref>
     <description>PostgreSQL connection resource</description>
     <res-ref-name>jdbc/postgres</res-ref-name>

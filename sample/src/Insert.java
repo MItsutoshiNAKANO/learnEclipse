@@ -24,7 +24,7 @@ import jp.ne.zaq.rinku.bkbin005.SampleBean;
 /**
  * Servlet implementation class Search
  */
-public class Search extends HttpServlet {
+public class Insert extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private DataSource ds;
@@ -46,7 +46,6 @@ public class Search extends HttpServlet {
 		} catch (NamingException e) {
 			throw new ServletException("can not lookup DataSource", e);
 		}
-		// throw new ServletException("In init() for test");
 	}
 	
 	/**
@@ -54,28 +53,8 @@ public class Search extends HttpServlet {
 	 */
     private void common(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String code = request.getParameter("code");
-    	System.err.println("code = " + code);
-    	if (code == null || code.equals("")) {
-    		request.getRequestDispatcher("/index.jsp").forward(request, response);
-    		return;
-    	}
-    	
-    	int codenum;
-    	try {
-    		codenum = Integer.parseInt(code);
-    	} catch (NumberFormatException e) {
-    		request.getRequestDispatcher("/index.jsp").forward(request, response);
-    		return;
-    	}
-
     	String yyyymm = request.getParameter("nengetu");
-    	SampleBean b = new SampleBean();
-    	try {
-    		b.setYYYYMM(yyyymm);
-    	} catch (NumberFormatException e) {
-    		request.getRequestDispatcher("/index.jsp").forward(request, response);
-    		return;
-    	}
+    	String days = request.getParameter("days");
 
     	Connection con;
     	try {
@@ -85,39 +64,31 @@ public class Search extends HttpServlet {
 		}
     	PreparedStatement pst;
     	try {
-			pst = con.prepareStatement("SELECT CODE, NENGETSU, NISSU FROM SAMPLE WHERE CODE = ? AND NENGETSU = ?");
+    		pst = con.prepareStatement("INSERT INTO SAMPLE (NISSU, CODE, NENGETSU) VALUES (?, ?, ?)");
+   			
 		} catch (SQLException e) {
 			throw new IOException("wrong prepareStatement", e);
 		}
+    	SampleBean b = new SampleBean();
+    	b.setCode(Integer.parseInt(code));
+    	b.setYYYYMM(yyyymm);
+    	b.setDays(Integer.parseInt(days));
+    	b.setState(DbState.UPDATE);
+    	// System.err.println(b); // debug
     	try {
-			pst.setInt(1, codenum);
-			pst.setDate(2, b.getSqlDate());
+			pst.setInt(1, b.getDays());
+			pst.setInt(2, b.getCode());
+			pst.setDate(3, b.getSqlDate());
+			System.err.println(b.getSqlDate()); // debug
 		} catch (SQLException e) {
 			throw new IOException("wrong number", e);
 		}
-    	ResultSet rst;
     	try {
-			rst = pst.executeQuery();
+			pst.execute();
 		} catch (SQLException e) {
 			throw new IOException("wrong executeQuery", e);
 		}
-		int days;
-    	try {
-			if (rst.next()) {
-				days = rst.getInt("NISSU");
-				b.setState(DbState.UPDATE);
-			} else {
-				days = -1;
-				b.setState(DbState.INSERT);
-			}
-		} catch (SQLException e) {
-			throw new IOException("DB was wrong", e);
-		}
-    	b.setCode(codenum);
-    	b.setDays(days);
-    	request.setAttribute("Bean", b);
     	request.getRequestDispatcher("/detail.jsp").forward(request, response);
-    	return;
     }
 
     

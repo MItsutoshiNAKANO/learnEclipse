@@ -15,6 +15,15 @@ public class SampleBean {
 	private Calendar ymd;
 	private String YYYYMM;
 	private int days;
+	private DbState state;
+	
+	/**
+	 * @see Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return code + " " + YYYYMM + " " + days + " " + state + " " + ymd;
+	}
 	
 	/**
 	 * @return the code
@@ -64,7 +73,7 @@ public class SampleBean {
     	if (m < 1 || m > 12) {
     		throw new NumberFormatException(mm + " is invalid month");
     	}
-    	ymd = new GregorianCalendar(y, m - 1, 1);
+    	this.ymd = new GregorianCalendar(y, m - 1, 1);
     	this.YYYYMM = yyyymm;
 	}
 
@@ -73,7 +82,7 @@ public class SampleBean {
 	}
 
 	public java.sql.Date getSqlDate() {
-		return null; // TODO
+		return new java.sql.Date(ymd.getTimeInMillis());
 	}
 
 	/**
@@ -93,11 +102,16 @@ public class SampleBean {
 	}
 	
 	/**
-	 * @see Object#toString()
+	 * @return the state
 	 */
-	@Override
-	public String toString() {
-		return code + " " + ymd + " " + days;
+	public DbState getState() {
+		return state;
+	}
+	/**
+	 * @param state the state to set
+	 */
+	public void setState(DbState state) {
+		this.state = state;
 	}
 
 }
