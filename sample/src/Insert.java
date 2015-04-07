@@ -84,10 +84,12 @@ public class Insert extends HttpServlet {
 			throw new IOException("wrong number", e);
 		}
     	try {
+    		System.err.println("exec insert");
 			pst.execute();
 		} catch (SQLException e) {
 			throw new IOException("wrong executeQuery", e);
 		}
+    	request.setAttribute("Bean", b);
     	request.getRequestDispatcher("/detail.jsp").forward(request, response);
     }
 

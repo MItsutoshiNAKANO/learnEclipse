@@ -108,7 +108,7 @@ public class Search extends HttpServlet {
 				days = rst.getInt("NISSU");
 				b.setState(DbState.UPDATE);
 			} else {
-				days = -1;
+				days = 0;
 				b.setState(DbState.INSERT);
 			}
 		} catch (SQLException e) {
