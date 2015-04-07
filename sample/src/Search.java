@@ -54,8 +54,8 @@ public class Search extends HttpServlet {
 	 */
     private void common(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	String code = request.getParameter("code");
-    	System.err.println("code = " + code);
     	if (code == null || code.equals("")) {
+        	System.err.println("code = " + code);
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
@@ -64,6 +64,7 @@ public class Search extends HttpServlet {
     	try {
     		codenum = Integer.parseInt(code);
     	} catch (NumberFormatException e) {
+        	System.err.println("code is mal " + code);
     		request.getRequestDispatcher("/index.jsp").forward(request, response);
     		return;
     	}
