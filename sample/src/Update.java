@@ -86,7 +86,7 @@ public class Update extends HttpServlet {
 			throw new IOException("wrong execute", e);
 		}
     	request.setAttribute("Bean", b);
-    	request.getRequestDispatcher("/detail.jsp").forward(request, response);
+    	request.getRequestDispatcher("/WEB-INF/detail.jsp").forward(request, response);
     }
 
     

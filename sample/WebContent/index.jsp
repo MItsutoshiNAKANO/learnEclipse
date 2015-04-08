@@ -8,7 +8,9 @@
 <title>検索</title>
 </head>
 <body>
+<header>
 <h1>テスト</h1>
+</header>
 <form method="post" action="Search">
 <label>コード<input type="text" name="code"/></label>
 <label>年月(YYYYMM)<input type="text" name="nengetu"/></label>

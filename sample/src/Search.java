@@ -117,7 +117,7 @@ public class Search extends HttpServlet {
     	b.setCode(codenum);
     	b.setDays(days);
     	request.setAttribute("Bean", b);
-    	request.getRequestDispatcher("/detail.jsp").forward(request, response);
+    	request.getRequestDispatcher("/WEB-INF/detail.jsp").forward(request, response);
     	return;
     }
 

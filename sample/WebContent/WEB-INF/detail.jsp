@@ -11,8 +11,8 @@
 <body>
 <header>
 <h1>詳細</h1>
-番号 <jsp:getProperty name="Bean" property="code"/>
-年月 <jsp:getProperty name="Bean" property="YYYYMM"/>
+番号 ${Bean.code}
+年月 ${Bean.YYYYMM}
 </header>
 
 <form method="post" action="${Bean.state}">
